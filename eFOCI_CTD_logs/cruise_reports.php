@@ -76,6 +76,14 @@ $CruiseID = htmlspecialchars($_GET['CruiseID']);
 <?php cruiselogs_table_summaryheader("cruises",$CruiseID); ?>
 </div>
 </div>
+
+<div class="container" id="Data Archive">
+<h3>Internal Data Access (ERDDAP):</h3>
+<div class="embed-responsive col-sm-11  embed-responsive-16by9">
+<?php echo '<iframe class="embed-responsive-item" src="http://ecofoci-field.pmel.noaa.gov:8080/erddap/search/index.html?searchFor='.$CruiseID.'"></iframe><br>' ?>
+</div>
+</div>
+
 <!-- Column 1 
 ================================================== -->
 <div class="container" id="maps">

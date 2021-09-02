@@ -156,7 +156,8 @@ if ($row["Deployed"] == 'n') { // strike through if not deployed
     }
     ?>
     
-    If not new, how many months were batteries used?  <?php echo $PreDeploymentNotes["ReleaseBattMonths"] ?>   months
+    <br><br>
+    Datasets, if available, can be obtained here: <?php echo '<a href="http://ecofoci-field.pmel.noaa.gov:8080/erddap/search/index.html?&searchFor='.$MooringID.'">Data Sets</a>' ?>
     </div>
 
     <br><br><div class="commentblock"><?php echo $PreDeploymentNotes["UserSignature"] ?> </div></div>
