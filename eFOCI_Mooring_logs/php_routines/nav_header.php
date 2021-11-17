@@ -41,6 +41,7 @@ array("Complete Table of Mooring Deployments","../eFOCI_Mooring_logs/mooring_tab
 array("Table of Mooring Official Locations (External)","https://www.pmel.noaa.gov/foci/foci_moorings/mooring_info/mooring_location_info.html",2),
 array("RealTime Mooring Data","",4),
 array("Dynamic M2 (Peggy) Plots Current","../dynamic_data/ArgosMooring/2021_peggybuoy.php",2),
+array("Dynamic M2 (Peggy) Location Beacon Map","../dynamic_data/ArgosMooring/2021_beacon.php",2),
 array("Dynamic M2 (Peggy) Plots 2020","../dynamic_data/ArgosMooring/2020_peggybuoy.php",2),
 array("Dynamic M2 (Peggy) Plots 2019","../dynamic_data/ArgosMooring/2019_peggybuoy.php",2),
 array("Dynamic M2 (Peggy) Plots 2018","../dynamic_data/ArgosMooring/2018_peggybuoy.php",2),

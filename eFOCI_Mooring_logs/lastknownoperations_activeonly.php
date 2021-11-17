@@ -218,6 +218,15 @@ include('php_routines/nav_header.php');
 <script src="../node_modules/datatables/examples/resources/bootstrap/3/dataTables.bootstrap.js"></script>
 <!-- jQuery backstretch for background responsive photos -->
 <script src="../scripts/jquery.backstretch.js"></script>
+<script type="text/javascript" src="../scripts/DataTables-1.10.12/media/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('table.table').dataTable( {
+        "iDisplayLength": 100,
+        "order": [[ 0, "desc" ]]
+        } );
+    } );
+</script>
 <script>
     $.backstretch(["../ecofoci_images/backgrounds/peggy_buoy.jpg"]);
 </script>

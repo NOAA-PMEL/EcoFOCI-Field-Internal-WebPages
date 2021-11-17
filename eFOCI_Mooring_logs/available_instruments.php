@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Instrument Inventory and Status (All)</title>
+<title>Available Instruments (Demo)</title>
 <!-- Bootstrap theme -->
 <link rel="stylesheet" type="text/css" id="bootstrap.css" href="../node_modules/bootstrap/dist/css/bootstrap.css.spacelab.V3.css" />
 <link rel="stylesheet" type="text/css" id="custom.css" href="../scripts/css/custom.css" />
@@ -35,13 +35,10 @@ include('php_routines/nav_header.php');
 
 <div class="col-md-12 center-block" style="padding:20px;">
 
-<h4>Legend</h4>
-<p> <em style="color: grey;">Grey</em> values have no cal history in the database (or have mismatching serial no) </p>
-<p> <em style="color: red;">Red</em> values are not active equipment (lost/destroyed/not recovered/etc). </p>
-<p> <em style="color: blue;">Blue</em> values have calibrations that are 3 years old or older from today </p>
-<p> <em style="color: yellow;">Yellow</em> values are currently deployed instruments based on the deployment log sheets </p>
+<h4>Description</h4>
+<p> Instruments listed here are not currently deployed, have calibration records within the last 10 years and are not listed as "Repaired", "Unknown", or ""</p>
 
-<p>To view only active instruments <a href="lastknownoperations_activeonly.php">all EcoFOCI</a> instruments</p>
+<p>To view all <a href="lastknownoperations.php">all EcoFOCI</a> instruments</p>
 
 
 
@@ -59,28 +56,28 @@ include('php_routines/nav_header.php');
   <div class="tabbable">
     <div class="tab-content">
       <div class="tab-pane active" id="AAA">
-        <p><?php last_operations_report('inst_sbe3','cal_sbe3','False'); ?></p>
+        <p><?php available_report('inst_sbe3','cal_sbe3','True'); ?></p>
       </div>
       <div class="tab-pane" id="AAB">
-        <p><?php last_operations_report('inst_sbe4','cal_sbe4','False'); ?></p>
+        <p><?php available_report('inst_sbe4','cal_sbe4','True'); ?></p>
       </div>
       <div class="tab-pane" id="AAC">
-        <p><?php last_operations_report('inst_sbe43','cal_sbe43','False'); ?></p>
+        <p><?php available_report('inst_sbe43','cal_sbe43','True'); ?></p>
       </div>
       <div class="tab-pane" id="AAD">
-        <p><?php last_operations_report('inst_sbe9','cal_sbe9','False'); ?></p>        
+        <p><?php available_report('inst_sbe9','cal_sbe9','True'); ?></p>        
       </div>
       <div class="tab-pane" id="AAE">
-        <p><?php last_operations_report('inst_sbeprawler','cal_sbeprawler','False'); ?></p>        
+        <p><?php available_report('inst_sbeprawler','cal_sbeprawler','True'); ?></p>        
       </div>      
       <div class="tab-pane" id="AAF">
-        <p><?php last_operations_report('inst_sbe19','cal_sbe19','False'); ?></p>        
+        <p><?php available_report('inst_sbe19','cal_sbe19','True'); ?></p>        
       </div>
       <div class="tab-pane" id="AAG">
-        <p><?php last_operations_report('inst_sbe5','cal_sbe5','False'); ?></p>        
+        <p><?php available_report('inst_sbe5','cal_sbe5','True'); ?></p>        
       </div>
       <div class="tab-pane" id="AAH">
-        <p><?php last_operations_report('inst_trans','cal_trans','False'); ?></p>        
+        <p><?php available_report('inst_trans','cal_trans','True'); ?></p>        
       </div>
     </div>
   </div> <!-- /tabbable -->
@@ -97,22 +94,22 @@ include('php_routines/nav_header.php');
   <div class="tabbable">
     <div class="tab-content">
       <div class="tab-pane active" id="AA">
-        <p><?php last_operations_report_wpressure('inst_sbe37','cal_sbe37','False'); ?></p>
+        <p><?php available_report_wpressure('inst_sbe37','cal_sbe37','True'); ?></p>
       </div>
       <div class="tab-pane" id="AB">
-        <p><?php last_operations_report_wpressure('inst_sbe16','cal_sbe16','False'); ?></p>
+        <p><?php available_report_wpressure('inst_sbe16','cal_sbe16','True'); ?></p>
       </div>
       <div class="tab-pane" id="AC">
-        <p><?php last_operations_report('inst_sbe49','cal_sbe49','False'); ?></p>
+        <p><?php available_report('inst_sbe49','cal_sbe49','True'); ?></p>
       </div>
       <div class="tab-pane" id="AD">
-        <p><?php last_operations_report_wpressure('inst_sbe39','cal_sbe39','False'); ?></p>
+        <p><?php available_report_wpressure('inst_sbe39','cal_sbe39','True'); ?></p>
       </div>
       <div class="tab-pane" id="AE">
-        <p><?php last_operations_report('inst_sbe56','cal_sbe56','False'); ?></p>
+        <p><?php available_report('inst_sbe56','cal_sbe56','True'); ?></p>
       </div>
       <div class="tab-pane" id="AF">
-        <p><?php last_operations_report('inst_sbe26','cal_sbe26','False'); ?></p>
+        <p><?php available_report('inst_sbe26','cal_sbe26','True'); ?></p>
       </div>
     </div>
   </div> <!-- /tabbable -->
@@ -129,22 +126,21 @@ include('php_routines/nav_header.php');
   <div class="tabbable">
     <div class="tab-content">
       <div class="tab-pane active" id="BA">
-        <p><?php last_operations_report('inst_mtr','cal_mtr','False'); ?></p>
+        <p><?php available_report('inst_mtr','cal_mtr','True'); ?></p>
       </div>
       <div class="tab-pane" id="BB">
-        <p><?php last_operations_report('inst_par','cal_par','False'); ?></p>
+        <p><?php available_report('inst_par','cal_par','True'); ?></p>
       </div>
       <div class="tab-pane" id="BC">
-        <p><?php last_operations_report('inst_nitrates','cal_nitrates','False'); ?></p>
+        <p><?php available_report('inst_nitrates','cal_nitrates','True'); ?></p>
       </div>
       <div class="tab-pane" id="BD">
-        <p><?php last_operations_report('inst_wetstarfluor','cal_wetstarfluor','False'); ?></p>
-        <p><?php last_operations_report('inst_ecofluor','cal_ecofluor','False'); ?></p>
+        <p><a href="optode_fluor_availability.php">Oxygen / Fluorometer Availability Page</a></p>
       </div>    
       <div class="tab-pane" id="BE">
-        <p><?php last_operations_report('inst_gastension','cal_gastension','False'); ?></p>
+        <p><?php available_report('inst_gastension','cal_gastension','False'); ?></p>
       </div>
-      </div>
+    </div>
   </div> <!-- /tabbable -->
   
 <h4> Surface Moorings </h4>
@@ -157,16 +153,16 @@ include('php_routines/nav_header.php');
   <div class="tabbable">
     <div class="tab-content">
       <div class="tab-pane active" id="CA">
-        <p><?php last_operations_report('inst_eppley','cal_eppley','False'); ?></p>
+        <p><?php available_report('inst_eppley','cal_eppley','True'); ?></p>
       </div>
       <div class="tab-pane" id="CB">
-        <p><?php last_operations_report('inst_spn1','cal_spn1','False'); ?></p>
+        <p><?php available_report('inst_spn1','cal_spn1','True'); ?></p>
       </div>
       <div class="tab-pane" id="CC">
-        <p><?php last_operations_report('inst_wxsensors','cal_wxsensors','False'); ?></p>
+        <p><?php available_report('inst_wxsensors','cal_wxsensors','True'); ?></p>
       </div>
       <div class="tab-pane" id="CD">
-        <p><?php last_operations_report('inst_windsensors','cal_windsensors','False'); ?></p>
+        <p><?php available_report('inst_windsensors','cal_windsensors','True'); ?></p>
       </div>
     </div>
   </div> <!-- /tabbable -->
@@ -176,24 +172,23 @@ include('php_routines/nav_header.php');
     <li class="active"><a href="#DA" data-toggle="tab">ADCP</a></li>
     <li><a href="#DB" data-toggle="tab">Ice Profilers</a></li>
     <li><a href="#DC" data-toggle="tab">Current meters</a></li>
-    <li><a href="#DD" data-toggle="tab">Current Meter Accessories (Oxy, Turb, Cond)</a></li>
+    <li><a href="#DD" data-toggle="tab">Oxygen Sensors</a></li>
   </ul>
   <div class="tabbable">
     <div class="tab-content">
       <div class="tab-pane active" id="DA">
-        <p><?php last_operations_report('inst_adcp','cal_adcp','False'); ?></p>
+        <p><?php available_report('inst_adcp','cal_adcp','True'); ?></p>
       </div>
       <div class="tab-pane" id="DB">
-        <p><?php last_operations_report('inst_iceprof','cal_iceprof','False'); ?></p>
+        <p><?php available_report('inst_iceprof','cal_iceprof','True'); ?></p>
       </div>
       <div class="tab-pane" id="DC">
-        <p><?php last_operations_report('inst_rcm','cal_rcm','False'); ?></p>
+        <p><?php available_report('inst_rcm','cal_rcm','True'); ?></p>
       </div>
       <div class="tab-pane" id="DD">
-        <p><?php last_operations_report('inst_rcm_ancillary','cal_rcm_ancillary','False'); ?></p>
+      <p><a href="optode_fluor_availability.php">Oxygen / Fluorometer Availability Page</a></p>
       </div>      
     </div>
-  </div> <!-- /tabbable -->
   
 
 <!-- end content

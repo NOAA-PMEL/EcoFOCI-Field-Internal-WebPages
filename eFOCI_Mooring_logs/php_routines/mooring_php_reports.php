@@ -290,7 +290,157 @@ function last_operations_report_wpressure($insttable,$caltable,$ActiveOnly){
     closeID($con); 
     }
 
+function available_report_wpressure($insttable,$caltable,$ActiveOnly){
+
+    $con = dbConnection('../db_configs/db_config_inst.php');
     
+    $query = "SELECT * FROM (SELECT f.MooringID, f.PostDeploymentNotes, f.deployed, f.recovered, f.InstID, f.Comments, f.PressureSensor, f.ServiceStatus, d.CalDate, d.InstID as ID FROM (
+                SELECT a.MooringID, a.PostDeploymentNotes, a.deployed, a.recovered, c.InstID, c.Comments, c.PressureSensor, c.ServiceStatus 
+                    FROM `ecofoci`.`mooringdeployedinstruments` a
+                    RIGHT JOIN `ecofoci_instruments`.`".$insttable."` c ON
+                    c.InstID = a.InstID WHERE `MooringID` NOT LIKE '9%' AND `MooringID` NOT LIKE 'F-' OR `MooringID` is NULL ORDER BY InstID, MooringID DESC limit 100000) AS f 
+                left JOIN `ecofoci_instruments`.`".$caltable."` d ON
+                f.InstID = d.InstID ORDER BY d.InstID, d.CalDate DESC limit 100000) as g group by InstID"   ;  
+
+    $result = $con->query($query) or die($con->error.__LINE__);
+    
+    
+    echo '<div class="table" ><table class="table table-condensed table-hover table-bordered ">
+    <thead>
+        <tr>
+        <th>ID and Serial Number</th>
+        <th>Last Deployment </th>
+        <th>Last Cal Date</th>
+        <th>Add New Cal Data</th>
+        <th>Pressure Sensor</th>
+        <th>Service Status</th>
+        <th>Last Deployment Notes</th>
+        <th>General Notes</th>
+        </tr>
+    </thead>
+    <tbody>'.PHP_EOL;
+    
+    while($row = $result->fetch_array(MYSQLI_ASSOC)) {
+
+        if ($row['ServiceStatus'] == 'RETIRED' and $ActiveOnly == 'False'){
+            $row_class='danger';
+            } elseif ($row['ServiceStatus'] == 'OTHER' and $ActiveOnly == 'False'){
+            $row_class='danger';        
+            } elseif ($row['ServiceStatus'] == 'LOSTATSEA' and $ActiveOnly == 'False'){
+            $row_class='danger';    
+            } elseif ($row['ServiceStatus'] == 'RETIRED' and $ActiveOnly == 'True'){
+            continue;
+            } elseif ($row['ServiceStatus'] == 'OTHER' and $ActiveOnly == 'True'){
+            continue;        
+            } elseif ($row['ServiceStatus'] == 'LOSTATSEA' and $ActiveOnly == 'True'){
+            continue;
+            } elseif (($row['ServiceStatus'] != 'RETIRED') and ($row['CalDate'] == '')){
+            $row_class='active';
+            } elseif (($row['ServiceStatus'] != 'RETIRED') and (days_since_date($row['CalDate']) > 3650)) {
+            $row_class='info';
+            } else {
+            $row_class='';
+            }
+
+        if (($row['ServiceStatus'] != 'RETIRED') and ($row['deployed'] == 'y') and ($row['recovered'] == '')) {
+        continue;
+        }
+
+        echo '<tr class='.$row_class.'>
+                <td><a href="instrument_report.php?InstID='.$row['InstID'].'">'.$row['InstID'].'</td>
+                <td><a href="mooring_record_view.php?mooringview_id='.$row['MooringID'].'">'.$row['MooringID'].'</td>
+                <td><a href="calibration_report.php?InstID='.$row['InstID'].'&Caltable='.$caltable.'">'.$row['CalDate'].'</td>
+                <td><a href="calibration_new.php?InstID='.$row['InstID'].'">Click Here</td>       
+                <td>'.$row['PressureSensor'].'</td>        
+                <td>'.$row['ServiceStatus'].'</td>        
+                <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">'.$row['PostDeploymentNotes'].'</td>        
+                <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">'.$row['Comments'].'</td></tr>'.PHP_EOL;        
+        
+    
+    }
+
+    echo '</tbody></table></div>'.PHP_EOL;
+
+
+    closeID($con); 
+}    
+
+function available_report($insttable,$caltable,$ActiveOnly){
+
+    $con = dbConnection('../db_configs/db_config_inst.php');
+    
+    $query = "SELECT * FROM (SELECT f.MooringID, f.PostDeploymentNotes, f.deployed, f.recovered, f.InstID, f.ServiceStatus, f.Comments, d.CalDate, d.InstID as ID FROM (
+                SELECT a.MooringID, a.PostDeploymentNotes, a.deployed, a.recovered, c.InstID, c.Comments, c.ServiceStatus 
+                    FROM `ecofoci`.`mooringdeployedinstruments` a
+                    RIGHT JOIN `ecofoci_instruments`.`".$insttable."` c ON
+                    c.InstID = a.InstID WHERE `MooringID` NOT LIKE '9%' AND `MooringID` NOT LIKE 'F-' OR `MooringID` is NULL ORDER BY InstID, MooringID DESC limit 100000) AS f 
+                left JOIN `ecofoci_instruments`.`".$caltable."` d ON
+                f.InstID = d.InstID ORDER BY d.InstID, d.CalDate DESC limit 100000) as g group by InstID"   ;  
+
+    $result = $con->query($query) or die($con->error.__LINE__);
+    
+    
+    echo '<div class="table" ><table class="table table-condensed table-hover table-bordered ">
+    <thead>
+        <tr>
+        <th>ID and Serial Number</th>
+        <th>Last Deployment </th>
+        <th>Last Cal Date</th>
+        <th>Add New Cal Data</th>
+        <th>Service Status</th>
+        <th>Last Deployment Notes</th>
+        <th>General Notes</th>
+        </tr>
+    </thead>
+    <tbody>'.PHP_EOL;
+    
+    while($row = $result->fetch_array(MYSQLI_ASSOC)) {
+
+        if ($row['ServiceStatus'] == 'RETIRED' and $ActiveOnly == 'False'){
+        $row_class='danger';
+        } elseif ($row['ServiceStatus'] == 'OTHER' and $ActiveOnly == 'False'){
+        $row_class='danger';        
+        } elseif ($row['ServiceStatus'] == 'LOSTATSEA' and $ActiveOnly == 'False'){
+        $row_class='danger';    
+        } elseif ($row['ServiceStatus'] == 'RETIRED' and $ActiveOnly == 'True'){
+        continue;
+        } elseif ($row['ServiceStatus'] == 'OTHER' and $ActiveOnly == 'True'){
+        continue;        
+        } elseif ($row['ServiceStatus'] == 'LOSTATSEA' and $ActiveOnly == 'True'){
+        continue;
+        } elseif (($row['ServiceStatus'] != 'RETIRED') and ($row['CalDate'] == '')){
+        $row_class='active';
+        } elseif (($row['ServiceStatus'] != 'RETIRED') and (days_since_date($row['CalDate']) > 3650)) {
+        $row_class='info';
+        } else {
+        $row_class='';
+        }
+
+        if (($row['ServiceStatus'] != 'RETIRED') and ($row['deployed'] == 'y') and ($row['recovered'] == '')) {
+        continue;
+        }
+
+        echo '<tr class='.$row_class.'>
+                <td><a href="instrument_report.php?InstID='.$row['InstID'].'">'.$row['InstID'].'</td>
+                <td><a href="mooring_record_view.php?mooringview_id='.$row['MooringID'].'">'.$row['MooringID'].'</td>
+                <td><a href="calibration_report.php?InstID='.$row['InstID'].'&Caltable='.$caltable.'">'.$row['CalDate'].'</td>
+                <td><a href="calibration_new.php?InstID='.$row['InstID'].'">Click Here</td>       
+                <td>'.$row['ServiceStatus'].'</td>        
+                <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">'.$row['PostDeploymentNotes'].'</td>        
+                <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">'.$row['Comments'].'</td></tr>'.PHP_EOL;        
+        
+    
+    }
+
+
+    echo '</tbody></table></div>'.PHP_EOL;
+
+
+    closeID($con); 
+}    
+    
+
+
 //table of mooring deployments/recoverys/notes    
 function mooring_table($table) {
     $con = dbConnection('../db_configs/db_config.php');
