@@ -174,6 +174,7 @@ function view_fluorometer_details() {
       <th>ID and Serial Number</th>
       <th>Last Deployment </th>
       <th>Last Cal Date</th>
+      <th>Add New Cal Data</th>
       <th>Last Deployment Notes</th>
       <th>Number of Channels</th>
       <th>Channel 1</th>
@@ -208,6 +209,7 @@ function view_fluorometer_details() {
           <td><a href="instrument_report.php?InstID='.$row['InstID'].'">'.$row['InstID'].'</td>
           <td><a href="mooring_record_view.php?mooringview_id='.$row['MooringID'].'">'.$row['MooringID'].'</td>
           <td><a href="calibration_report.php?InstID='.$row['InstID'].'&Caltable=cal_ecofluor">'.$row['CalDate'].'</td>
+          <td><a href="calibration_new.php?InstID='.$row['InstID'].'">Click Here</td>       
           <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">'.$row['PostDeploymentNotes'].'</td>        
           <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">'.$row['ChannelNumber'].'</td>        
           <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">'.$row['channel_1'].'</td>        
@@ -250,6 +252,7 @@ function view_optode_details() {
       <th>ID and Serial Number</th>
       <th>Last Deployment </th>
       <th>Last Cal Date</th>
+      <th>Add New Cal Data</th>
       <th>Last Deployment Notes</th>
       <th>General Notes</th>
       <th>Foil Type</th>
@@ -281,6 +284,7 @@ function view_optode_details() {
             <td><a href="instrument_report.php?InstID='.$row['InstID'].'">'.$row['InstID'].'</td>
             <td><a href="mooring_record_view.php?mooringview_id='.$row['MooringID'].'">'.$row['MooringID'].'</td>
             <td><a href="calibration_report.php?InstID='.$row['InstID'].'&Caltable=cal_rcm_ancillary">'.$row['CalDate'].'</td>
+            <td><a href="calibration_new.php?InstID='.$row['InstID'].'">Click Here</td>       
             <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">'.$row['PostDeploymentNotes'].'</td>        
             <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">'.$row['Comments'].'</td>     
             <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">'.$row['ResponseFoil'].'</td></tr>'.PHP_EOL;        

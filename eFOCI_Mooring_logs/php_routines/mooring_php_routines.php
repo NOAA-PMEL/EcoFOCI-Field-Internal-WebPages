@@ -97,7 +97,7 @@ function update_record_select() {
     </form>';
 }
 
-function view_record_select($max_year,$min_year) {
+function view_record_select($max_year,$min_year,$notdeployed) {
 
     echo '<form role="form" class="form-horizontal" id="mooringlogview" action="mooring_record_view.php" method="get">
     <fieldset>
@@ -108,8 +108,11 @@ function view_record_select($max_year,$min_year) {
     $con = dbConnection('../db_configs/db_config.php');
 
     //Get MooringID
-    $query = "SELECT * FROM MooringDeploymentLogs WHERE `MooringID` BETWEEN ".$min_year." AND ".$max_year." ORDER BY `MooringID` DESC";
-
+    if ( $notdeployed  == 'True') { 
+        $query = "SELECT * FROM MooringDeploymentLogs WHERE `MooringID` BETWEEN ".$min_year." AND ".$max_year." AND `DeploymentStatus` = 'NOTDEPLOYED' ORDER BY `MooringID` DESC";
+    } else {
+        $query = "SELECT * FROM MooringDeploymentLogs WHERE `MooringID` BETWEEN ".$min_year." AND ".$max_year." AND `DeploymentStatus` != BINARY 'NOTDEPLOYED'  ORDER BY `MooringID` DESC";
+    }
 
     $MooringID = $con->query($query) or die($con->error.__LINE__);
     

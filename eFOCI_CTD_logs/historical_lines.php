@@ -40,7 +40,7 @@ include('php_routines/cruise_php_routines.php');
 
 <!-- Bootstrap - Static navbar
 ================================================== -->
-<div class="container">
+<div class="container-fluid">
 
 
 <!-- Static navbar -->

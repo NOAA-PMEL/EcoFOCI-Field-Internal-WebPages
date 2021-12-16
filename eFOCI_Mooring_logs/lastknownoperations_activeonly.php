@@ -23,7 +23,7 @@ include('php_routines/nav_header.php');
 
 <!-- Bootstrap - Static navbar
 ================================================== -->
-<div class="container">
+<div class="container-fluid">
 
 
 <!-- Static navbar -->
@@ -84,6 +84,26 @@ include('php_routines/nav_header.php');
       </div>
     </div>
   </div> <!-- /tabbable -->
+
+  <h4> Seabird Instruments (Underway)</h4>
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#AAAA" data-toggle="tab">Temperature (SBE-38)</a></li>
+    <li><a href="#AAAB" data-toggle="tab">MicroTSG (SBE-45)</a></li>
+    <li><a href="#AAAC" data-toggle="tab">Hull Temperature (SBE-48)</a></li>
+  </ul>
+  <div class="tabbable">
+    <div class="tab-content">
+      <div class="tab-pane active" id="AAAA">
+        <p><?php last_operations_report('inst_sbe38','cal_sbe38','True'); ?></p>
+      </div>
+      <div class="tab-pane" id="AAAB">
+        <p><?php last_operations_report('inst_sbe45','cal_sbe45','True'); ?></p>
+      </div>
+      <div class="tab-pane" id="AAAC">
+        <p><?php last_operations_report('inst_sbe48','cal_sbe48','True'); ?></p>
+      </div>
+    </div>
+  </div> <!-- /tabbable -->  
 
 <h4> Seabird Instruments </h4>
   <ul class="nav nav-tabs">

@@ -24,7 +24,7 @@ include('../php_routines/news_reports.php');
 
 <!-- Bootstrap - Static navbar
 ================================================== -->
-<div class="container">
+<div class="container-fluid">
 
 
 <!-- Static navbar -->

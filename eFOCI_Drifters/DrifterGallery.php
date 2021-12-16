@@ -38,7 +38,7 @@ $DrifterYear = htmlspecialchars($_GET['DrifterYear']);
 
 <!-- Bootstrap - Static navbar
 ================================================== -->
-<div class="container">
+<div class="container-fluid">
 
 
 <!-- Static navbar -->

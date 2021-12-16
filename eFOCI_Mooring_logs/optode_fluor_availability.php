@@ -39,7 +39,7 @@ include('php_routines/nav_header.php');
 
 <!-- Bootstrap - Static navbar
 ================================================== -->
-<div class="container">
+<div class="container-fluid">
 
 <!-- Static navbar -->
 <?php build_navbar("InstrumentStatus") ?>
@@ -50,7 +50,7 @@ include('php_routines/nav_header.php');
 <!-- Start Content 
 ================================================== -->
 
-<div class="col-md-12 center-block" style="padding:20px;">
+<div class="center-block" style="padding:20px;">
 
 
 <h3>Description:</h3>

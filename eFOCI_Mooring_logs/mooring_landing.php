@@ -21,7 +21,7 @@ include('php_routines/nav_header.php');
 
 <!-- Bootstrap - Static navbar
 ================================================== -->
-<div class="container">
+<div class="container-fluid">
 
 
 <!-- Static navbar -->
@@ -35,19 +35,24 @@ include('php_routines/nav_header.php');
     <h3> Mooring Sites After 2000</h3>
     <?php 
     $max_year = date("y") + 1; 
-    view_record_select($max_year,01); ?>
+    view_record_select($max_year,01,'False'); ?>
 
     <h3> Mooring Sites Prior to 2000</h3>
     <?php 
-    $max_year = date("y") + 1; 
-    view_record_select(00, 00); ?>
+    view_record_select(00, 00,'False'); ?>
+
 
     <div style="text-align: center"><img src="../ecofoci_images/Dyson_Strausz.jpg" alt="Dyson" class="rounded mx-auto d-block" class="img-fluid" width = 90%></div>
 
     <br><br>
 
-
     <?php update_record_select(); ?>
+
+    <h3> Designed but never Deployed Moorings (Post 2000)</h3>
+    <?php 
+    $max_year = date("y") + 1; 
+    view_record_select($max_year, 00,'True'); ?>
+
 
     <fieldset>
     <legend>Create Mooring Record</legend>   
