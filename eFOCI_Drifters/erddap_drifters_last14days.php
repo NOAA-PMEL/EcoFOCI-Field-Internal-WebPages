@@ -78,7 +78,7 @@ include('php_routines/nav_header.php');
         }
     }
     // cors must be enabled in Tomcat / Apache for erddap access
-    var geojsonLayer = new L.geoJson.ajax("http://akutan.pmel.noaa.gov:8080/erddap/tabledap/2021_Argos_Drifters_NRT.geoJson?&time<now-14days", {  
+    var geojsonLayer = new L.geoJson.ajax("http://akutan.pmel.noaa.gov:8080/erddap/tabledap/2022_Argos_Drifters_NRT.geoJson?&time<now-14days", {  
         pointToLayer: function (feature, latlng) {
             return L.circleMarker(latlng, {
             radius: 4,
@@ -100,27 +100,7 @@ include('php_routines/nav_header.php');
     });  
     geojsonLayer.addTo(mymap);
 
-    var geojsonLayer = new L.geoJson.ajax("http://akutan.pmel.noaa.gov:8080/erddap/tabledap/2021_Argos_Drifters_NRT.geoJson?&time>now-14days", {  
-        pointToLayer: function (feature, latlng) {
-            return L.circleMarker(latlng, {
-            radius: 4,
-            color: "#000000",
-            weight: .2,
-            opacity: 1,
-            fillOpacity: 0.8,
-            fillColor: "#000000",
-        });
-        },
-        onEachFeature: function (feature, layer) {
-            var popupContent = '<table>';
-            for (var p in feature.properties) {
-                popupContent += '<tr><td>' + p + '</td><td>'+ feature.properties[p] + '</td></tr>';
-            }
-            popupContent += '</table>';
-        layer.bindPopup(popupContent);
-        }
-    });  
-    geojsonLayer.addTo(mymap);
+
 </script>
 <!-- End Leaflet map -->
 
