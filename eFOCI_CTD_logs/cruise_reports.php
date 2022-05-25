@@ -9,7 +9,7 @@
 <link rel="stylesheet" type="text/css" id="node_modules/bootstrap.css" href="../node_modules/bootstrap/dist/css/bootstrap.css.spacelab.V3.css" />
 <link rel="stylesheet" type="text/css" id="custom.css" href="../scripts/bootstrap_datatables/bootstrap_datatables.css" />
 <link rel="stylesheet" type="text/css" id="custom.css" href="../scripts/css/custom.css" />
-<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v1.0.1/leaflet.css" />
+<link rel="stylesheet" href="../node_modules/leaflet/dist/leaflet.css" />
 
 
 <!-- js calendar
@@ -104,8 +104,9 @@ $CruiseID = htmlspecialchars($_GET['CruiseID']);
 <!-- leaflet Maps
 ================================================== -->
 <!-- Leaflet map -->
-<script type="text/javascript" src="../scripts/leaflet/leaflet.js"></script>
-<script type="text/javascript" src="../scripts/leaflet/leaflet.ajax.min.js"></script>
+<script type="text/javascript" src="../node_modules/leaflet/dist/leaflet.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.js"></script>
+<script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
 <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
 <div id="leaflet_map" style="width: 100%; height: 400px"></div>
 <script>

@@ -157,6 +157,8 @@ function ctdrecord_cruise_view() {
 
             if ($columnName == 'CruiseID') {
             echo '<td><a href="cruise_reports.php?CruiseID='.$row['CruiseID'].'">'.$row['CruiseID'].'</a></td>'.PHP_EOL;
+            } elseif ($columnName == 'ctdlogs_pdf_name') {
+            echo '<td><a href="../dynamic_data/EcoFOCI_CTDCasts/ctd_cruise_logs/'.$row['CruiseYear'].'/'.$row['CruiseID'].'/'.$row['ctdlogs_pdf_name'].'">'.$row['ctdlogs_pdf_name'].'</a></td>'.PHP_EOL;
             } else {
             echo '<td>'.$columnData.'</td>'.PHP_EOL;
             }
