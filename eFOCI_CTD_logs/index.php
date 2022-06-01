@@ -39,7 +39,6 @@ include('php_routines/nav_header.php');
 ================================================== -->
 <div class="col-md-8 center-block" style="padding:20px;">
 
-<?php carousel_images() ?>
 
 </div>
 <!-- end carousel
