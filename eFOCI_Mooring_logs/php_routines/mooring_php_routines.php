@@ -923,6 +923,13 @@ function instrument_select_input_form($db_id) {
         echo enumDropdown('mooringdeployedinstruments', 'DataStatus',$val, false); 
         echo '</div>';
         echo '</div>';
+        } elseif ( $key == 'ArchiveConventions') {
+        echo ' <div class="form-group">'.PHP_EOL;
+        echo '<label for="'.$row['Field'].'" class="col-md-3 control-label">'.$key.'</label>   '.PHP_EOL;
+        echo '<div class="col-md-3">';
+        echo enumDropdown('mooringdeployedinstruments', 'ArchiveConventions',$val, false); 
+        echo '</div>';
+        echo '</div>';
         } else {
         echo ' <div class="form-group">'.PHP_EOL;
         echo '<label for="'.$key.'" class="col-md-3 control-label">'.$key.'</label>   '.PHP_EOL;
