@@ -1053,14 +1053,16 @@ function view_quicklook_select($path) {
     echo '<div class="table-responsive" ><table id="" class="table table-condensed table-hover table-bordered ">
   <thead>
     <tr>
-      <th>Instrument File</th>
+      <th>Instrument File (dygraph)</th>
+      <th>Instrument File (highcharts)</th>
     </tr>
   </thead>
   <tbody>'.PHP_EOL;
     echo $files;
     foreach ($files1 as $value) {
 
-        echo '<tr><td><a href="MooringQuicklooks_dygraph.php?MooringID='.explode('.', $value, 2)[0].'">'.$value.'</a></td></tr>'.PHP_EOL;
+        echo '<tr><td><a href="MooringQuicklooks_dygraph.php?MooringID='.explode('.', $value, 2)[0].'">'.$value.'</a></td>'.PHP_EOL;
+        echo '<td><a href="MooringQuicklooks_hc.php?MooringID='.explode('.', $value, 2)[0].'">'.$value.'</a></td></tr>'.PHP_EOL;
     }
     
     echo '</tbody></table></div>'.PHP_EOL;
