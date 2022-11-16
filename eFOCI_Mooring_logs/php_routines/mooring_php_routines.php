@@ -902,6 +902,13 @@ function instrument_select_input_form($db_id) {
         echo '<input type="text" class="form-control" name="'.$key.'" id="'.$key.'" value="'.$val.'">   '.PHP_EOL;
         echo '</div>';
         echo '</div>'; 
+        } elseif ( $key == 'Prepped') {
+        echo ' <div class="form-group">'.PHP_EOL;
+        echo '<label for="'.$row['Field'].'" class="col-md-3 control-label">'.$key.'</label>   '.PHP_EOL;
+        echo '<div class="col-md-3">';
+        echo enumDropdown('mooringdeployedinstruments', 'Deployed', $val, false); 
+        echo '</div>';
+        echo '</div>';
         } elseif ( $key == 'Deployed') {
         echo ' <div class="form-group">'.PHP_EOL;
         echo '<label for="'.$row['Field'].'" class="col-md-3 control-label">'.$key.'</label>   '.PHP_EOL;

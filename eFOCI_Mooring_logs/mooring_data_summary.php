@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mooring Location Summary</title>
+<title>Deployed Mooring Location Summary</title>
 <!-- Bootstrap theme -->
 <link rel="stylesheet" type="text/css" id="bootstrap.css" href="../node_modules/bootstrap/dist/css/bootstrap.css.spacelab.V3.css" />
 <link rel="stylesheet" type="text/css" id="custom.css" href="../scripts/bootstrap_datatables/bootstrap_datatables.css" />
@@ -21,6 +21,11 @@
 include('../ecofoci_images/header.php'); 
 include('php_routines/mooring_php_reports.php');
 include('php_routines/nav_header.php');
+
+$MooringID = htmlspecialchars($_GET['mooringview_id']);
+
+$MooringID_short = str_replace('-','',$MooringID);
+$MooringID_short = strtolower($MooringID_short);
 ?>
 
 <!-- Bootstrap - Static navbar
@@ -36,13 +41,17 @@ include('php_routines/nav_header.php');
 
 
 
-<div class="col-md-12 center-block" style="padding:20px;">
+<div class="col-md-12" style="padding:20px;">
 
 
-<h3>Mooring Location Summary</h3>   
 
 <div class="container">
-<div class="col-lg-8 col-md-10 col-sm-12 hidden-xs center-block">
+
+<div class="col-lg-12 col-md-12 col-sm-12">
+<?php echo '<a href="http://ecofoci-field.pmel.noaa.gov:8080/erddap/search/index.html?&searchFor='.$MooringID.'">Data Sets</a>' ?>
+</div>
+<div class="col-lg-3 col-md-12 col-sm-12">
+<h3>Mooring Location Summary</h3>   
 
 <!-- leaflet Maps
 ================================================== -->
@@ -75,34 +84,51 @@ include('php_routines/nav_header.php');
         opacity: 1,
         fillOpacity: 0.8
     };
-    var geojsonLayer = new L.GeoJSON.AJAX("<?php echo '../dynamic_data/EcoFOCI_Moorings/maps_visualizations/All_Moorings.geojson'?>", {
+    var geojsonLayer = new L.GeoJSON.AJAX("<?php echo 'http://akutan.pmel.noaa.gov:8080/erddap/tabledap/datasets_Mooring_'.$MooringID_short.'_final.geoJson?latitude%2Clongitude&distinct()'?>", {
         pointToLayer: function (feature, latlng) {
-            return L.circleMarker(latlng, geojsonMarkerOptions);
+            return L.circleMarker(latlng, {
+            radius: 4,
+            color: "#ffffff",
+            weight: .2,
+            opacity: 1,
+            fillOpacity: 0.8,
+            fillColor: "#D54339",
+        });
         },
-        onEachFeature: function (feature, layer) {
-        var shortname = (feature.properties.MooringID).replace('-', '').toLowerCase();
-        // layer.bindPopup(shortname);
-        layer.bindPopup(' <iframe src="http://ecofoci-field.pmel.noaa.gov/bell/eFOCI_Mooring_logs/MooringQuicklooks_hc.php?MooringID='+shortname+'_temperature_final" height="200" width="600" title="Iframe Temperature"></iframe><iframe src="http://ecofoci-field.pmel.noaa.gov/bell/eFOCI_Mooring_logs/MooringQuicklooks_hc.php?MooringID='+shortname+'_salinity_final" height="200" width="600" title="Iframe Temperature"></iframe> ',{  maxWidth: "auto"});
-        }
     });  
 
     geojsonLayer.addTo(mymap);
 
 
 </script>
+</div>
 <!-- End Leaflet map -->
+<div class="col-lg-9 col-md-12 col-sm-12 hidden-xs">
 
+<h3>Timeseries</h3>   
 
-<p>
-<br><a href="../dynamic_data/EcoFOCI_Moorings/maps_visualizations/All_Moorings.geojson">Grab the .geojson file for the above graphic here with comprehensive mooring information at each site </a>
-<br>Cut and paste the file into the following page for a dynamic view of the sites <a href="http://geojson.io/#map=2/20.0/0.0">geojson.io</a>
-</p>
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#CA" data-toggle="tab">Final</a></li>
+    <li><a href="#CB" data-toggle="tab">Preliminary</a></li>
+</ul>
+<div class="tabbable">
+    <div class="tab-content">
+        <div class="tab-pane active" id="CA">
+            <iframe src="<?php echo 'MooringQuicklooks_hc.php?MooringID='.$MooringID_short.'_temperature'?>" style="width: 100%; height: 400px"></iframe><br>
+            <iframe src="<?php echo 'MooringQuicklooks_hc.php?MooringID='.$MooringID_short.'_salinity'?>" style="width: 100%; height: 400px"></iframe><br>
+            <iframe src="<?php echo 'MooringQuicklooks_hc.php?MooringID='.$MooringID_short.'_chlor_fluorescence'?>" style="width: 100%; height: 400px"></iframe><br>
+        </div>
+      <div class="tab-pane" id="CB">
+            <iframe src="<?php echo 'MooringQuicklooks_hc.php?MooringID='.$MooringID_short.'_temperature_prelim'?>" style="width: 100%; height: 400px"></iframe><br>
+            <iframe src="<?php echo 'MooringQuicklooks_hc.php?MooringID='.$MooringID_short.'_salinity_prelim'?>" style="width: 100%; height: 400px"></iframe><br>
+            <iframe src="<?php echo 'MooringQuicklooks_hc.php?MooringID='.$MooringID_short.'_chlor_fluorescence_prelim'?>" style="width: 100%; height: 400px"></iframe><br>
+      </div>
+    </div>
+  </div> <!-- /tabbable -->
+
 </div>
+
 </div>
-
-
-<?php mooring_location_summary('MooringDeploymentLogs'); ?>
-
 
 <!-- end content
 ================================================== -->
@@ -125,10 +151,6 @@ include('php_routines/nav_header.php');
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 
-<script src="../scripts/jquery.backstretch.js"></script>
-<script>
-    $.backstretch(["../ecofoci_images/backgrounds/peggy_buoy.jpg"]);
-</script>
 
 </body>
 </html>

@@ -157,7 +157,7 @@ if ($row["Deployed"] == 'n') { // strike through if not deployed
     ?>
     
     <br><br>
-    Datasets, if available, can be obtained here: <?php echo '<a href="http://ecofoci-field.pmel.noaa.gov:8080/erddap/search/index.html?&searchFor='.$MooringID.'">Data Sets</a>' ?>
+    Datasets, if available, can be obtained here: <?php echo '<a href="mooring_data_summary.php?mooringview_id='.$MooringID.'">Data Sets and Dynamic Visualizations</a>' ?>
     </div>
 
     <br><br><div class="commentblock"><?php echo $PreDeploymentNotes["UserSignature"] ?> </div></div>

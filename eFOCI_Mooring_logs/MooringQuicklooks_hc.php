@@ -8,7 +8,7 @@
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 <script src="https://code.highcharts.com/modules/boost.js"></script>
 
-<link rel="stylesheet" type="text/css" id="css/highcharts.css" href="css/highcharts.css" />
+<link rel="stylesheet" type="text/css" id="http://ecofoci-field.pmel.noaa.gov/bell/dynamic_data/EcoFOCI_Moorings/css/highcharts.css" href="css/highcharts.css" />
 </head>
 <body>
 
@@ -27,18 +27,17 @@ $MooringID = htmlspecialchars($_GET['MooringID']);
 
 <script type="text/javascript">
 
+
 Highcharts.chart("container", {
     chart: {
       zoomType: 'xy'
     },
-    title: {
-        text:  <?php echo '"'.$MooringID.'.csv"';?>
-    },
     legend: {
         enabled: true
     },
-    subtitle: {
-        text: "Source:EcoFOCI Data Repo"
+    title: {
+        text: <?php echo '"'.$MooringID.'"';?>,
+        useHTML:true
     },
     data: {
         csvURL:

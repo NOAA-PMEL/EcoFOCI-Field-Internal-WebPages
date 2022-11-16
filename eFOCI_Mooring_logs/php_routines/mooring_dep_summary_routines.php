@@ -177,7 +177,7 @@ function instrument_datastatus(){
         }
 
         echo '<tr class="'.$row_class.'">
-              <td>'.$row['MooringID'].'</td>
+              <td><a href="mooring_record_view.php?mooringview_id='.$row['MooringID'].'">'.$row['MooringID'].'</td>
               <td><a href="operations_update.php?id='.$row['id'].'">'.$row['InstID'].'</a></td>
               <td>'.$row['Depth'].'</td>
               <td>'.$row['ActualDepth'].'</td>
