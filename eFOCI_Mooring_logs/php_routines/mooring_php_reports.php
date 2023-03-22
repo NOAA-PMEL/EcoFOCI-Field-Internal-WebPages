@@ -23,7 +23,9 @@ function deployment_report($deployed,$recovered){
 
     $con = dbConnection('../db_configs/db_config.php');
     
-    $query = "SELECT MooringID, InstType, SerialNo, Prepped, PreDeploymentNotes from `MooringDeployedInstruments` 
+    $query = "SELECT MooringDeployedInstruments.MooringID, InstType, SerialNo, Prepped, PreDeploymentNotes, CruiseNumber 
+        FROM `MooringDeployedInstruments` 
+        JOIN `mooringdeploymentlogs` on MooringDeployedInstruments.MooringID = mooringdeploymentlogs.MooringID
         WHERE `Recovered`='".$recovered."' AND `Deployed`='".$deployed."'
         ORDER BY `MooringID` Desc";
             
@@ -38,6 +40,7 @@ function deployment_report($deployed,$recovered){
         <th>Last Known Mooring ID</th>
         <th>Prepped</th>
         <th>PreDeployment Notes</th>
+        <th>Cruise</th>
       </tr>
     </thead>
     <tbody>'.PHP_EOL;
@@ -45,7 +48,7 @@ function deployment_report($deployed,$recovered){
     while($row = $result->fetch_array(MYSQLI_ASSOC)) {
 
     echo '<tr><td>'.$row['InstType'].'</td><td>'.$row['SerialNo'].'</td>
-          <td><a href="mooring_record_update.php?mooringupdate_id='.$row['MooringID'].'">'.$row['MooringID'].'</td><td>'.$row['Prepped'].'</td><td>'.$row['PreDeploymentNotes'].'</td></tr>'.PHP_EOL;
+          <td><a href="mooring_record_update.php?mooringupdate_id='.$row['MooringID'].'">'.$row['MooringID'].'</td><td>'.$row['Prepped'].'</td><td>'.$row['PreDeploymentNotes'].'</td><td>'.$row['CruiseNumber'].'</td></tr>'.PHP_EOL;
     }    
     echo '</tbody></table></div>'.PHP_EOL;
 
@@ -149,7 +152,7 @@ function last_operations_report($insttable,$caltable,$ActiveOnly){
                 SELECT a.MooringID, a.PostDeploymentNotes, a.deployed, a.recovered, c.InstID, c.Comments, c.ServiceStatus 
                     FROM `ecofoci`.`mooringdeployedinstruments` a
                     RIGHT JOIN `ecofoci_instruments`.`".$insttable."` c ON
-                    c.InstID = a.InstID WHERE `MooringID` NOT LIKE '9%' AND `MooringID` NOT LIKE 'F-' OR `MooringID` is NULL ORDER BY InstID, MooringID DESC limit 100000) AS f 
+                    c.InstID = a.InstID WHERE `MooringID` NOT LIKE '9%' AND `MooringID` NOT LIKE 'F-' AND `deployed` NOT LIKE 'n' OR `MooringID` is NULL ORDER BY InstID, MooringID DESC limit 100000) AS f 
                 left JOIN `ecofoci_instruments`.`".$caltable."` d ON
                 f.InstID = d.InstID ORDER BY d.InstID, d.CalDate DESC limit 100000) as g group by InstID"   ;  
 

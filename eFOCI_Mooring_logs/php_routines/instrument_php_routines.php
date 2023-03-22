@@ -180,6 +180,7 @@ function view_fluorometer_details() {
       <th>Channel 1</th>
       <th>Channel 2 (if avail.)</th>
       <th>Channel 3 (if avail.)</th>
+      <th>Service Status</th>
       <th>General Notes</th>
     </tr>
   </thead>
@@ -190,15 +191,19 @@ function view_fluorometer_details() {
 
     if ($row['ServiceStatus'] == 'RETIRED'){
       $row_class='danger';
-      } elseif ($row['ServiceStatus'] == 'OTHER'){
+    } elseif ($row['ServiceStatus'] == 'OTHER'){
       $row_class='danger';        
-      } elseif (($row['ServiceStatus'] != 'RETIRED') and ($row['CalDate'] == '')){
+    } elseif ($row['ServiceStatus'] == 'LOSTATSEA'){
+      $row_class='danger';
+    } elseif ($row['ServiceStatus'] == 'REPAIR'){
+      $row_class='warning';
+    } elseif (($row['ServiceStatus'] != 'RETIRED') and ($row['CalDate'] == '')){
       $row_class='active';
-      } elseif (($row['ServiceStatus'] != 'RETIRED') and (days_since_date($row['CalDate']) > 1095)) {
+    } elseif (($row['ServiceStatus'] != 'RETIRED') and (days_since_date($row['CalDate']) > 1095)) {
       $row_class='info';
-      } else {
+    } else {
       $row_class='';
-      }    
+    }    
 
       if (($row['ServiceStatus'] != 'RETIRED') and ($row['deployed'] == 'y') and ($row['recovered'] == '')) {
         $row_class='warning';
@@ -215,6 +220,7 @@ function view_fluorometer_details() {
           <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">'.$row['channel_1'].'</td>        
           <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">'.$row['channel_2'].'</td>        
           <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">'.$row['channel_3'].'</td>        
+          <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">'.$row['ServiceStatus'].'</td>       
           <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">'.$row['Comments'].'</td></tr>'.PHP_EOL;        
     
   
@@ -255,6 +261,7 @@ function view_optode_details() {
       <th>Add New Cal Data</th>
       <th>Last Deployment Notes</th>
       <th>General Notes</th>
+      <th>Service Status</th>
       <th>Foil Type</th>
     </tr>
   </thead>
@@ -264,17 +271,19 @@ function view_optode_details() {
 
     if ($row['ServiceStatus'] == 'RETIRED'){
       $row_class='danger';
-      } elseif ($row['ServiceStatus'] == 'OTHER'){
+    } elseif ($row['ServiceStatus'] == 'OTHER'){
       $row_class='danger';        
-      } elseif ($row['ServiceStatus'] == 'RETIRED'){
-      continue;
-      } elseif (($row['ServiceStatus'] != 'RETIRED') and ($row['CalDate'] == '')){
+    } elseif ($row['ServiceStatus'] == 'LOSTATSEA'){
+      $row_class='danger';
+    } elseif ($row['ServiceStatus'] == 'REPAIR'){
+      $row_class='warning';
+    } elseif (($row['ServiceStatus'] != 'RETIRED') and ($row['CalDate'] == '')){
       $row_class='active';
-      } elseif (($row['ServiceStatus'] != 'RETIRED') and (days_since_date($row['CalDate']) > 1095)) {
+    } elseif (($row['ServiceStatus'] != 'RETIRED') and (days_since_date($row['CalDate']) > 1095)) {
       $row_class='info';
-      } else {
+    } else {
       $row_class='';
-      }    
+    }    
 
     if (($row['ServiceStatus'] != 'RETIRED') and ($row['deployed'] == 'y') and ($row['recovered'] == '')) {
       $row_class='warning';
@@ -287,6 +296,7 @@ function view_optode_details() {
             <td><a href="calibration_new.php?InstID='.$row['InstID'].'">Click Here</td>       
             <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">'.$row['PostDeploymentNotes'].'</td>        
             <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">'.$row['Comments'].'</td>     
+            <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">'.$row['ServiceStatus'].'</td>       
             <td style="word-wrap: break-word;min-width: 160px;max-width: 160px;white-space:normal">'.$row['ResponseFoil'].'</td></tr>'.PHP_EOL;        
       
   

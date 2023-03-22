@@ -20,7 +20,8 @@
 <script>
     $(document).ready(function() {
         $('table.table').dataTable( {
-        "iDisplayLength": 100,
+        "lengthMenu": [ 10, 25, 50, 100, 300 ],
+        "iDisplayLength": 300,
         "responsive": true
         } );
     } );
