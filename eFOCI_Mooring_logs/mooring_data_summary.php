@@ -116,7 +116,7 @@ $MooringID_short = strtolower($MooringID_short);
         <div class="tab-pane active" id="CA">
             <iframe src="<?php echo 'MooringQuicklooks_hc.php?MooringID='.$MooringID_short.'_temperature'?>" style="width: 100%; height: 400px"></iframe><br>
             <iframe src="<?php echo 'MooringQuicklooks_hc.php?MooringID='.$MooringID_short.'_salinity'?>" style="width: 100%; height: 400px"></iframe><br>
-            <iframe src="<?php echo 'MooringQuicklooks_hc.php?MooringID='.$MooringID_short.'_chlor_fluorescence'?>" style="width: 100%; height: 400px"></iframe><br>
+            <iframe src="<?php echo 'MooringQuicklooks_hc.php?MooringID='.$MooringID_short.'_chlorophyll_fluorescence'?>" style="width: 100%; height: 400px"></iframe><br>
         </div>
       <div class="tab-pane" id="CB">
             <iframe src="<?php echo 'MooringQuicklooks_hc.php?MooringID='.$MooringID_short.'_temperature_prelim'?>" style="width: 100%; height: 400px"></iframe><br>
