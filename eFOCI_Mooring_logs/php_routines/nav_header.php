@@ -63,7 +63,6 @@ array("Quick Entry Links","#",1),
 array("Update Moorings","../eFOCI_Mooring_logs/mooring_landing.php",2),
 array("Update Deployed Instrument (Non-Mooring)","../eFOCI_Mooring_logs/equipment_out.php",2),
 array("Add Calibration Record","../eFOCI_Mooring_logs/calibration_select.php",3),
-array("News","../eFOCI_Mooring_logs/system_updates.php",0),
 );
 
 

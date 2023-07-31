@@ -906,7 +906,7 @@ function instrument_select_input_form($db_id) {
         echo ' <div class="form-group">'.PHP_EOL;
         echo '<label for="'.$row['Field'].'" class="col-md-3 control-label">'.$key.'</label>   '.PHP_EOL;
         echo '<div class="col-md-3">';
-        echo enumDropdown('mooringdeployedinstruments', 'Deployed', $val, false); 
+        echo enumDropdown('mooringdeployedinstruments', 'Prepped', $val, false); 
         echo '</div>';
         echo '</div>';
         } elseif ( $key == 'Deployed') {

@@ -51,6 +51,7 @@ $Depth = htmlspecialchars($_POST['Depth']);
 $ActualDepth = htmlspecialchars($_POST['ActualDepth']);
 $InstType = htmlspecialchars($_POST['InstType']);
 $SerialNo = htmlspecialchars($_POST['SerialNo']);
+$Prepped = htmlspecialchars($_POST['Prepped']);
 $Deployed = htmlspecialchars($_POST['Deployed']);
 $Recovered = htmlspecialchars($_POST['Recovered']);
 $GPSTimeCheck = htmlspecialchars($_POST['GPSTimeCheck']);
@@ -81,12 +82,12 @@ $DataStatus = htmlspecialchars($_POST['DataStatus']);
 
 $con = dbConnection('../db_configs/db_config.php');
 
-$sql = "UPDATE `MooringDeployedInstruments` SET Depth= ?, ActualDepth=?, InstType=?, SerialNo=?, GPSTimeCheck=?, Deployed=?, Recovered=?, InstTimeCheck=?, MooringID=?, PreDeploymentNotes=?, PostDeploymentNotes=?, SetupPerson=?, RetrievalPerson=?, ArchiveConventions=?, DataFile=?, NumberDataRecords=?, DeployedBatteryVoltage=?, RecoveredBatteryVoltage=?, GPSTimeOnGMT=?, GPSTimeOffGMT=?, DataStatus=?, DateTimeOnGMT=?, DateTimeOffGMT=? WHERE `id`=? ";
+$sql = "UPDATE `MooringDeployedInstruments` SET Depth= ?, ActualDepth=?, InstType=?, SerialNo=?, GPSTimeCheck=?, Prepped=?, Deployed=?, Recovered=?, InstTimeCheck=?, MooringID=?, PreDeploymentNotes=?, PostDeploymentNotes=?, SetupPerson=?, RetrievalPerson=?, ArchiveConventions=?, DataFile=?, NumberDataRecords=?, DeployedBatteryVoltage=?, RecoveredBatteryVoltage=?, GPSTimeOnGMT=?, GPSTimeOffGMT=?, DataStatus=?, DateTimeOnGMT=?, DateTimeOffGMT=? WHERE `id`=? ";
 //Prepare insert statements
 if ( !$stmt = $con->prepare($sql)) {
    echo "Prepare Error: ($con->errno) $con->error".PHP_EOL;
 }
-if ( !$stmt->bind_param('ddsssssssssssssiddsssssi',$Depth,$ActualDepth,$InstType,$SerialNo,$GPSTimeCheck,$Deployed,$Recovered,$InstTimeCheck,$MooringID,$PreDeploymentNotes,$PostDeploymentNotes,$SetupPerson,$RetrievalPerson,$ArchiveConventions,$DataFile,$NumberDataRecords,$DeployedBatteryVoltage,$RecoveredBatteryVoltage,$GPSTimeOnGMT,$GPSTimeOffGMT,$DataStatus,$DateTimeOnGMT,$DateTimeOffGMT,$db_id)) {
+if ( !$stmt->bind_param('ddssssssssssssssiddsssssi',$Depth,$ActualDepth,$InstType,$SerialNo,$GPSTimeCheck,$Prepped,$Deployed,$Recovered,$InstTimeCheck,$MooringID,$PreDeploymentNotes,$PostDeploymentNotes,$SetupPerson,$RetrievalPerson,$ArchiveConventions,$DataFile,$NumberDataRecords,$DeployedBatteryVoltage,$RecoveredBatteryVoltage,$GPSTimeOnGMT,$GPSTimeOffGMT,$DataStatus,$DateTimeOnGMT,$DateTimeOffGMT,$db_id)) {
   echo "Binding Parameter Error: ($con->errno) $con->error".PHP_EOL;
 }
 if ( !$stmt->execute()) {
